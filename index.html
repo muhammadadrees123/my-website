@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Casino Club Demo</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#0b1020;color:#fff}
+header{padding:24px 18px;text-align:center;background:#141b33}
+h1{margin:0 0 8px;font-size:32px}p{color:#b9c1d9}
+.wrap{max-width:900px;margin:auto;padding:20px}.balance{background:#1b2542;border-radius:16px;padding:16px;text-align:center;margin-bottom:18px}
+.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.card{background:#151d35;border:1px solid #2c385d;border-radius:18px;padding:18px;text-align:center}
+.card h2{margin:8px 0}.emoji{font-size:48px}
+button{border:0;border-radius:10px;padding:12px 18px;background:#6c5ce7;color:white;font-weight:bold;cursor:pointer}
+button:active{transform:scale(.98)}.result{min-height:32px;margin:14px 0;font-weight:bold}
+.notice{font-size:13px;text-align:center;color:#9da8c7;margin-top:22px}
+</style>
+</head>
+<body>
+<header>
+<h1>🎰 Casino Club</h1>
+<p>Free-to-play demo — virtual coins only</p>
+</header>
+<div class="wrap">
+<div class="balance">Virtual Coins: <strong id="coins">1000</strong></div>
+<div class="games">
+<div class="card"><div class="emoji">🎲</div><h2>Dice</h2><div class="result" id="diceResult">Roll the dice</div><button onclick="dice()">Roll</button></div>
+<div class="card"><div class="emoji">🎰</div><h2>Slots</h2><div class="result" id="slotResult">Try your luck</div><button onclick="slots()">Spin</button></div>
+<div class="card"><div class="emoji">🃏</div><h2>Cards</h2><div class="result" id="cardResult">Draw a card</div><button onclick="card()">Draw</button></div>
+</div>
+<div class="notice">Demo only. No deposits, withdrawals, prizes, or real-money gambling.</div>
+</div>
+<script>
+let coins=1000;
+function update(){document.getElementById('coins').textContent=coins}
+function spend(){if(coins<10){alert('Not enough virtual coins');return false}coins-=10;update();return true}
+function dice(){if(!spend())return;let n=Math.floor(Math.random()*6)+1;document.getElementById('diceResult').textContent='You rolled '+n+' 🎲'}
+function slots(){if(!spend())return;let a=['🍒','🍋','⭐','7️⃣','💎'];let r=[0,0,0].map(()=>a[Math.floor(Math.random()*a.length)]);document.getElementById('slotResult').textContent=r.join(' | ')}
+function card(){if(!spend())return;let suits=['♥','♦','♣','♠'], ranks=['A','2','3','4','5','6','7','8','9','10','J','Q','K'];let c=ranks[Math.floor(Math.random()*13)]+suits[Math.floor(Math.random()*4)];document.getElementById('cardResult').textContent='You drew '+c}
+</script>
+</body>
+</html>
